@@ -13,8 +13,6 @@ c.font_size = 12
 c.audible_bell = 'Disabled'
 c.scrollback_lines = 999999
 c.enable_scroll_bar = true
-c.freetype_load_target = 'Light'
-c.freetype_render_target = 'HorizontalLcd'
 
 c.window_background_opacity = 0.97
 c.color_scheme = 'OneHalfDark'
