@@ -1,0 +1,26 @@
+Windows Registry Editor Version 5.00
+
+; Make Windows keep time in UTC
+; Useful if dual-booting with Linux
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation]
+"RealTimeIsUniversal"=dword:00000001
+
+; Disable Caps Lock
+ [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,00,00,3a,00,00,00,00,00
+
+; Disable web search in windows start menu
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000000
+
+; Reduced Menu Show delay
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"MenuShowDelay"="100"
+
+; Show seconds in Taskbar clock
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowSecondsInSystemClock"=dword:00000001
+
+; Remove bing autoconnect/MS NCSI
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet]
+"EnableActiveProbing"=dword:00000000
