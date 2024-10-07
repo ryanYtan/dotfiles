@@ -7,11 +7,14 @@ if wez.config_builder then
   c = wez.config_builder()
 end
 
+c.default_domain = is_windows and 'WSL:Ubuntu-24.04' or c.default_domain
 c.font = is_windows and wez.font 'Consolas' or wez.font 'SF Mono'
 c.font_size = 12
 c.audible_bell = 'Disabled'
 c.scrollback_lines = 999999
 c.enable_scroll_bar = true
+c.freetype_load_target = 'Light'
+c.freetype_render_target = 'HorizontalLcd'
 
 c.window_background_opacity = 0.97
 c.color_scheme = 'OneHalfDark'
