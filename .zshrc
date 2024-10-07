@@ -23,10 +23,6 @@ export MACHOME="~"
 export MACDESKTOP="~/Desktop"
 export MACONEDRIVE=""
 
-if [ $GIT_USERNAME == "" ] || [ $GIT_EMAIL == "" ]; then
-    echo "Please set GIT_USERNAME and GIT_EMAIL in .zshrc"
-fi
-
 ### Initial setup
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -45,7 +41,7 @@ __PROMPT_STAT="#"
 __PROMPT_LEADER="$"
 NEWLINE=$'\n'
 PROMPT="%(?:${__PROMPT_STAT}:#)"
-PROMPT+=' %~${NEWLINE}${__PROMPT_CONFIG_BOLD_RED}${__PROMPT_LEADER}${__PROMPT_CONFIG_RESET} '
+PROMPT+=' %~${NEWLINE}${__PROMPT_CONFIG_BOLD_GREEN}${__PROMPT_LEADER}${__PROMPT_CONFIG_RESET} '
 
 ### Aliases and Functions
 alias k=kubectl
