@@ -46,12 +46,14 @@ PROMPT+=' %~${NEWLINE}${__PROMPT_CONFIG_BOLD_GREEN}${__PROMPT_LEADER}${__PROMPT_
 ### Aliases and Functions
 alias k=kubectl
 alias t=kubetail
+alias kbash="kubectl exec -it pod/ubuntu -- /bin/bash"
 alias python="python3"
 alias sizeof="du -sh $1"
 alias gp="git pull"
 alias gss="git status"
 alias gadd="git add ."
 alias gcm="git commit"
+alias fff="egrep -v \"(enqueueing|health/live|health/ready|Redis Health|Liveness Health|Readiness|fluentd)\""
 function to_mp3() {
     ffmpeg -i "$1" -ab 320k -map_metadata 0 -id3v2_version 3 "${1%%.*}.mp3"
 }
