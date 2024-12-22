@@ -40,7 +40,7 @@ __PROMPT_CONFIG_CYAN="%{$fg[cyan]%}"
 __PROMPT_STAT="#"
 __PROMPT_LEADER="$"
 NEWLINE=$'\n'
-PROMPT="%(?:${__PROMPT_STAT}:#)"
+PROMPT="%n %(?:${__PROMPT_STAT}:#)"
 PROMPT+=' %~${NEWLINE}${__PROMPT_CONFIG_BOLD_GREEN}${__PROMPT_LEADER}${__PROMPT_CONFIG_RESET} '
 
 ### Aliases and Functions
