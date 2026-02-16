@@ -46,17 +46,40 @@ PROMPT+=' %~${NEWLINE}${__PROMPT_CONFIG_BOLD_GREEN}${__PROMPT_LEADER}${__PROMPT_
 ### Aliases and Functions
 alias k=kubectl
 alias t=kubetail
-alias kbash="kubectl exec -it pod/ubuntu -- /bin/bash"
-alias python="python3"
+alias kbash="kubectl exec -it pod/ubuntu -- /bin/bash -c 'cd /work/ && exec bash'"
+alias kbashpg="kubectl exec -it pod/pgadmin-0 -- /bin/bash"
 alias sizeof="du -sh $1"
+alias gch="git checkout"
 alias gp="git pull"
 alias gss="git status"
 alias gadd="git add ."
 alias gcm="git commit"
+alias gllc="git diff HEAD~ HEAD" #see changes of last commit
 alias fff="egrep -v \"(enqueueing|health/live|health/ready|Redis Health|Liveness Health|Readiness|fluentd)\""
+alias watchpods="watch -n 1 kubectl get pods"
+alias dn_clear="find . -type d \( -name bin -o -name obj \) -exec rm -r {} \;"
+
+function xmlc() {
+    file="$1"
+    base="${file%.*}"
+    ext="${file##*.}"
+    if [ ! -f "$file" ]; then
+        return 1
+    else
+        XMLLINT_INDENT="    "; cat "$file" | xmllint --format - | sed 's/&quot;/"/g' | sed 's/&amp;/\&/g' > "${base}_fmt.${ext}"
+    fi
+}
+
+function towebp() {
+    file="$1"
+    base=$(basename $file)
+    magick \"$file\" \"$base.webp\"
+}
+
 function to_mp3() {
     ffmpeg -i "$1" -ab 320k -map_metadata 0 -id3v2_version 3 "${1%%.*}.mp3"
 }
+
 function vscode() {
     if [[ $(uname) == "Darwin" ]]; then
         VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
@@ -66,16 +89,37 @@ function vscode() {
         echo "error: vscode function could not detect OS"
     fi
 }
+
 function hardsub() {
     subfile="${1%.*}.ass"
     filter="pad=ih*16/9:ih:(iw-ow)/2:0,ass=$subfile"
     ffmpeg -i "$1" -vf "$filter" -c:a copy -c:v libx264 -preset slow -crf 23 -aspect 16/9 "${1%.*}_out.mp4"
 }
+
 function cdw() {
     line=$(sed -e 's~\\~/~g' -e "s/\([CD]\):/\L\1/" -e "s/^/\/mnt\//g" <<< "$1")
     cd "$line"
 }
 
+function squarify () {
+    if [ "$#" -ne 2 ]; then
+        echo "Usage: squarify input.svg output.png"
+        return 1
+    fi
+
+    local input="$1"
+    local output="$2"
+
+    magick "$input" \
+        -background white \
+        -alpha remove -alpha off \
+        -gravity center \
+        -extent "%[fx:max(w,h)]x%[fx:max(w,h)]" \
+        "$output"
+}
+
+
+# Git configuration
 git config --global core.editor "vim"
 git config --global user.name "$GIT_USERNAME"
 git config --global user.email "$GIT_EMAIL"

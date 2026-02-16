@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'drmikehenry/vim-fontsize'
 Plug 'mechatroner/rainbow_csv'
 Plug 'tpope/vim-surround'
+Plug 'romainl/vim-cool'
 call plug#end()
 
 """ Settings
@@ -81,6 +82,9 @@ augroup FileTypeSettings
     autocmd FileType yaml setlocal tabstop=2 shiftwidth=2
 augroup END
 
+""" Key maps
+map q <Nop>
+
 """ Colorscheme
 if (has("termguicolors"))
     set termguicolors
@@ -89,3 +93,6 @@ colorscheme slate
 highlight MatchParen cterm=underline ctermbg=black ctermfg=white
 highlight MatchParen gui=underline guibg=black guifg=white
 highlight Search cterm=NONE ctermfg=black ctermbg=yellow
+
+" upon opening the vim file, wait 100ms asynchronously and then undo all changes using :u0.  This is available in VIM 8.1+.  This gets rid of the letter g entry from the xterm/vim bug
+autocmd VimEnter * call timer_start(100, { tid -> execute(':u0')})
