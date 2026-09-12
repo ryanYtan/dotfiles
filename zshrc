@@ -24,6 +24,11 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=( zsh-syntax-highlighting )
 source $ZSH/oh-my-zsh.sh
 
+### Aliases
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/Projects/dotfiles}"
+[ -f "$DOTFILES_DIR/aliases_work.zsh" ] && source "$DOTFILES_DIR/aliases_work.zsh"
+[ -f "$DOTFILES_DIR/aliases_personal.zsh" ] && source "$DOTFILES_DIR/aliases_personal.zsh"
+
 # Git setup
 git config --global core.editor "vim"
 git config --global user.name "$GIT_USERNAME"
